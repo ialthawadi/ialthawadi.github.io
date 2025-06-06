@@ -20,19 +20,42 @@
       height: 100%;
       width: 100%;
       overflow: hidden;
+    }
+
+    html {
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;
       background-position: center;
-      font-family: Eden, Arial, Helvetica, sans-serif;
-      background-color: transparent;
     }
 
     body {
+      font-family: Eden, Arial, Helvetica, sans-serif;
       font-size: 240%;
       line-height: 1em;
       font-weight: normal;
+      background-color: transparent;
       color: black;
+    }
+
+    table, tr, td {
+      background-color: transparent;
+    }
+
+    table {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      align-content: center;
+    }
+
+    table tr {
+      vertical-align: top;
+    }
+
+    table td {
+      padding: 0.5em;
+      text-align: left;
     }
 
     a {
@@ -44,52 +67,23 @@
       text-decoration: none;
     }
 
-    .text-left, .text-right {
-      position: absolute;
-      top: 2vh;
-      width: 45%;
-    }
-
-    .text-left {
-      left: 2vw;
-      text-align: left;
-    }
-
-    .text-right {
-      right: 2vw;
-      text-align: right;
-      direction: rtl;
-    }
-
     p {
       margin: 0;
       padding: 0;
       margin-bottom: 1em;
     }
-      
-    #mobile-word {
-      display: none;
+
+    img {
+      display: block;
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    @media only screen and (max-width: 768px) {
-      .text-left,
-      .text-right {
-      display: none;
+    #mydiv {
+      position: absolute;
+      z-index: 9;
     }
-
-    #mobile-word {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      width: 100%;
-      text-align: center;
-      padding: 1rem;
-      font-size: 16vw;
-      word-break: break-word;
-      line-height: 1.1;
-    }
-}
   </style>
 
   <script type="text/javascript">
@@ -99,7 +93,7 @@
       var path = 'assets/images/' + selected;
       document.documentElement.style.backgroundImage = 'url(' + path + ')';
 
-      // detect brightness for contrast
+      // Create image object to compute brightness
       var img = new Image();
       img.crossOrigin = "Anonymous";
       img.src = path;
@@ -130,47 +124,31 @@
           var textColor = brightness > 127 ? 'black' : 'white';
 
           document.body.style.color = textColor;
-          document.getElementById('mobile-word').style.color = textColor;
 
           var links = document.getElementsByTagName('a');
           for (var j = 0; j < links.length; j++) {
             links[j].style.color = textColor;
           }
         } catch (e) {
-          console.warn("Contrast detection failed:", e);
+          console.warn("Contrast detection failed: ", e);
         }
       };
-
-      // mobile words
-      if (window.innerWidth <= 768) {
-        var words = ['Books', 'كتب', 'Printing', 'طباعة', 'Publishing', 'نشر', 'Designing', 'تصميم'];
-        var chosen = words[Math.floor(Math.random() * words.length)];
-        document.getElementById('mobile-word').innerHTML = chosen;
-      }
     };
   </script>
 </head>
 
 <body>
-
-  <!-- Mobile only -->
-  <div id="mobile-word"></div>
-
-  <div class="text-left">
-    <p>
-      Ibrahim Al Thawadi<br/>
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        <p>
+          Ibrahim Al Thawadi
+          <span style="float: right;">إبراهيم الذوادي</span><br/>
           <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#97;&#105;&#108;&#64;&#97;&#108;&#116;&#104;&#97;&#119;&#97;&#100;&#105;&#46;&#105;&#110;&#102;&#111;">&#109;&#97;&#105;&#108;&#32;&#40;&#97;&#116;&#41;&#32;&#97;&#108;&#116;&#104;&#97;&#119;&#97;&#100;&#105;&#32;&#40;&#100;&#111;&#116;&#41;&#32;&#105;&#110;&#102;&#111;</a>
-    </p>
-  </div>
-
-  <div class="text-right">
-    <p>
-      إبراهيم الذوادي<br/>
-      <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#97;&#105;&#108;&#64;&#97;&#108;&#116;&#104;&#97;&#119;&#97;&#100;&#105;&#46;&#105;&#110;&#102;&#111;">
-        بريد (آت) الذوادي (نقطة) إنفو
-      </a>
-    </p>
-  </div>
-
+          <span style="float: right; line-height: 50px;"><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#97;&#105;&#108;&#64;&#97;&#108;&#116;&#104;&#97;&#119;&#97;&#100;&#105;&#46;&#105;&#110;&#102;&#111;">بريد (آت) الذوادي (نقطة) إنفو</a></span>
+        </p>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>
